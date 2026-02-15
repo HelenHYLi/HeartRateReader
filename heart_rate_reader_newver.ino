@@ -118,21 +118,21 @@ void loop() {
   if (setHeartRate < 50) {
     motorSpeed = 40;
     messageNum = 1;
-    blue = 255;
+    // blue = 255;
   } else if (setHeartRate < 100) {
     motorSpeed = 70;
     messageNum = 2;
-    blue = 200;
+    // blue = 200;
   } else if (setHeartRate < 200) {
     motorSpeed = 90;
     messageNum = 3;
-    blue = 150;
+    // blue = 150;
   } else {
     motorSpeed = 120;
     messageNum = 4;
-    blue = 10;
+    // blue = 10;
   }
-
+  blue = 260 - setHeartRate;
   red = setHeartRate - 10;
 
   display.println(message[0]);  // display heartrate on OLED
