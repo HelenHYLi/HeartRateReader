@@ -15,6 +15,10 @@
 #define GREEN 10
 #define BLUE 11
 
+int red = 0;
+int green = 0;
+int blue = 0;
+
 // OLED Display
 SSD1306AsciiWire display;
 String message[] = {"Heart Rate <3", "Your signals are too weak :/", "Your phase difference \n is zero", "Your heart rate is \n amplified!", "Your heart is in the \n saturation region"};
@@ -114,26 +118,29 @@ void loop() {
   if (setHeartRate < 50) {
     motorSpeed = 40;
     messageNum = 1;
-    LEDDisplay(40, 0, 255);
+    blue = 255;
   } else if (setHeartRate < 100) {
     motorSpeed = 70;
     messageNum = 2;
-    LEDDisplay(150, 0, 255);
+    blue = 200;
   } else if (setHeartRate < 200) {
     motorSpeed = 90;
     messageNum = 3;
-    LEDDisplay(255, 0, 150);
+    blue = 150;
   } else {
     motorSpeed = 120;
     messageNum = 4;
-    LEDDisplay(255, 0, 10);
+    blue = 10;
   }
+
+  red = setHeartRate - 10;
 
   display.println(message[0]);  // display heartrate on OLED
   display.println();
   display.println(setHeartRate);
   display.println();
   display.println(message[messageNum]);  // display heartrate on OLED
+  LEDDisplay(red, green, blue);
 
   // Display 8x8 matrix and start and stop motor
   count = 0;
